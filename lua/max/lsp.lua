@@ -39,8 +39,11 @@ local lsp_flags = {
   debounce_text_changes = 150,
 }
 local lsp = require 'lspconfig'
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local luadev = require 'lua-dev'.setup {
   lspconfig = {
+    capabilities = capabilities,
     on_attach = on_attach,
     settings = {
       Lua = {
@@ -56,13 +59,26 @@ local luadev = require 'lua-dev'.setup {
   }
 }
 
+
 lsp.sumneko_lua.setup(luadev)
 
+lsp['graphql'].setup {
+  capabilities = capabilities,
+  on_attach = on_attach
+}
+
+lsp['prismals'].setup {
+  capabilities = capabilities,
+  on_attach = on_attach
+}
+
 lsp['pyright'].setup {
+  capabilities = capabilities,
   on_attach = on_attach,
   flags = lsp_flags,
 }
 lsp['tsserver'].setup {
+  capabilities = capabilities,
   on_attach = on_attach,
   flags = lsp_flags,
   settings = {
@@ -90,7 +106,9 @@ lsp['tsserver'].setup {
     },
   },
 }
+
 lsp['rust_analyzer'].setup {
+  capabilities = capabilities,
   on_attach = on_attach,
   flags = lsp_flags,
   -- Server-specific settings...
