@@ -130,6 +130,18 @@ function M.setup()
         require 'max.plugins.lualine'.setup()
       end
     }
+    use {
+      'karb94/neoscroll.nvim',
+      config = function()
+        require 'max.plugins.neoscroll'.setup()
+      end
+    }
+    use {
+      'Xuyuanp/scrollbar.nvim',
+      config=function()
+        require'max.plugins.scrollbar'.setup()
+      end
+    }
   end
 
   if packer_bootstrap then
