@@ -18,6 +18,14 @@ map('n', '<leader>ff', '<cmd>lua require(\'telescope.builtin\').find_files()<cr>
 map('n', '<leader>fg', '<cmd>lua require(\'telescope.builtin\').live_grep()<cr>')
 map('n', '<leader>fb', '<cmd>lua require(\'telescope.builtin\').buffers()<cr>')
 map('n', '<leader>fh', '<cmd>lua require(\'telescope.builtin\').help_tags()<cr>')
+-- switch buffer
+map("n", "<S-h>", ":bprevious<CR>")
+map("n", "<S-l>", ":bnext<CR>")
+-- center search results
+map("n", "n", "nzz")
+map("n", "N", "Nzz")
+-- cancel search highlighting with ESC
+map("n", "<ESC>", ":nohlsearch<Bar>:echo<CR>")
 
 -- TERMINAL
 map('t', '<ESC>', '<C-\\><C-n>')
