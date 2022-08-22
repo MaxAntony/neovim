@@ -10,3 +10,4 @@ end
 map("n", "<Leader>w", ":w<cr>")
 map('n', '<Leader>q', ':q<cr>')
 map("n", "<Leader>Q", ":wqa<cr>") -- quit nvim writing all
+map("n", "<Leader>e", ":NvimTreeToggle<cr>")
