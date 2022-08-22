@@ -123,6 +123,13 @@ function M.setup()
         require 'max.plugins.onedark'.setup()
       end
     }
+    use {
+      'nvim-lualine/lualine.nvim',
+      requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+      config = function()
+        require 'max.plugins.lualine'.setup()
+      end
+    }
   end
 
   if packer_bootstrap then
