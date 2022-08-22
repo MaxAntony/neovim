@@ -101,6 +101,12 @@ function M.setup()
         require 'gitsigns'.setup()
       end
     }
+    use {
+      'navarasu/onedark.nvim',
+      config = function()
+        require 'max.plugins.onedark'.setup()
+      end
+    }
     -- LSP
   end
 
