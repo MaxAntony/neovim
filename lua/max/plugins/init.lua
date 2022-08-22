@@ -38,6 +38,14 @@ function M.setup()
   -- Plugins
   local function plugins(use)
     use 'wbthomason/packer.nvim' --package manager
+    use {
+      'kyazdani42/nvim-tree.lua',
+      requires={'kyazdani42/nvim-web-devicons'},
+      tag='nightly',
+      config=function()
+        require'max.plugins.nvim-tree'.setup()
+      end
+    }
   end
 
   if packer_bootstrap then
