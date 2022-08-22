@@ -21,11 +21,11 @@ function M.setup()
       on_attach = "disable", -- function(bufnr). If nil, will use the deprecated mapping strategy
       remove_keymaps = false, -- boolean (disable totally or not) or list of key (lhs)
       view = {
-        adaptive_size = false,
+        adaptive_size = true,
         centralize_selection = false,
         width = 30,
         height = 30,
-        hide_root_folder = false,
+        hide_root_folder = true,
         side = "left",
         preserve_window_proportions = false,
         number = false,
@@ -69,7 +69,7 @@ function M.setup()
         },
         icons = {
           webdev_colors = true,
-          git_placement = "before",
+          git_placement = "after",
           padding = " ",
           symlink_arrow = " ➛ ",
           show = {
@@ -111,7 +111,7 @@ function M.setup()
         auto_open = true,
       },
       update_focused_file = {
-        enable = false,
+        enable = true,
         update_root = false,
         ignore_list = {},
       },
@@ -133,7 +133,7 @@ function M.setup()
       },
       filters = {
         dotfiles = false,
-        custom = {},
+        custom = {'.git$'},
         exclude = {},
       },
       filesystem_watchers = {
@@ -167,7 +167,7 @@ function M.setup()
           },
         },
         open_file = {
-          quit_on_open = false,
+          quit_on_open = true w,
           resize_window = true,
           window_picker = {
             enable = true,
