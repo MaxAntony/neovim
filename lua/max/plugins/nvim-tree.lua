@@ -167,7 +167,7 @@ function M.setup()
           },
         },
         open_file = {
-          quit_on_open = true w,
+          quit_on_open = true,
           resize_window = true,
           window_picker = {
             enable = true,
