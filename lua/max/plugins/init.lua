@@ -38,6 +38,22 @@ function M.setup()
   -- Plugins
   local function plugins(use)
     use 'wbthomason/packer.nvim' --package manager
+    -- LSP
+    use {
+      'neovim/nvim-lspconfig',
+    }
+    use {
+      'williamboman/mason.nvim',
+      config=function()
+        require'mason'.setup()
+      end
+    }
+    use {
+      'williamboman/mason-lspconfig.nvim',
+      config=function()
+        require'mason-lspconfig'.setup()
+      end
+    }
     -- UTILS
     use 'jiangmiao/auto-pairs'
     use 'voldikss/vim-floaterm'
@@ -107,7 +123,6 @@ function M.setup()
         require 'max.plugins.onedark'.setup()
       end
     }
-    -- LSP
   end
 
   if packer_bootstrap then
