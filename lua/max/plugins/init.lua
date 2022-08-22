@@ -41,23 +41,48 @@ function M.setup()
     -- LSP
     use {
       'neovim/nvim-lspconfig',
+      requires = {
+        'j-hui/fidget.nvim'
+      }
     }
     use {
       'williamboman/mason.nvim',
-      config=function()
-        require'mason'.setup()
+      config = function()
+        require 'mason'.setup()
       end
     }
     use {
       'williamboman/mason-lspconfig.nvim',
-      config=function()
-        require'mason-lspconfig'.setup()
+      config = function()
+        require 'mason-lspconfig'.setup()
       end
     }
+    use {
+      'lukas-reineke/lsp-format.nvim',
+      config = function()
+        require 'lsp-format'.setup()
+      end
+    }
+    use {
+      "hrsh7th/nvim-cmp",
+      requires = {
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-cmdline",
+        'onsails/lspkind.nvim',
+        'L3MON4D3/LuaSnip',
+        'saadparwaiz1/cmp_luasnip',
+      },
+      config = function()
+        require 'max.plugins.nvim-cmp'.setup()
+      end
+    }
+    use "folke/lua-dev.nvim"
+
     -- UTILS
     use 'jiangmiao/auto-pairs'
     use 'voldikss/vim-floaterm'
-    use 'folke/lua-dev.nvim'
     use 'p00f/nvim-ts-rainbow'
     use {
       'nvim-treesitter/nvim-treesitter',
@@ -78,16 +103,16 @@ function M.setup()
     }
     use {
       'kyazdani42/nvim-tree.lua',
-      requires={'kyazdani42/nvim-web-devicons'},
-      tag='nightly',
-      config=function()
-        require'max.plugins.nvim-tree'.setup()
+      requires = { 'kyazdani42/nvim-web-devicons' },
+      tag = 'nightly',
+      config = function()
+        require 'max.plugins.nvim-tree'.setup()
       end
     }
     use {
       'numToStr/Comment.nvim',
-      config=function()
-        require'Comment'.setup()
+      config = function()
+        require 'Comment'.setup()
       end
     }
     use {
@@ -138,8 +163,21 @@ function M.setup()
     }
     use {
       'Xuyuanp/scrollbar.nvim',
-      config=function()
-        require'max.plugins.scrollbar'.setup()
+      config = function()
+        require 'max.plugins.scrollbar'.setup()
+      end
+    }
+    use {
+      'j-hui/fidget.nvim',
+      after = 'lualine.nvim',
+      config = function()
+        require 'fidget'.setup {}
+      end
+    }
+    use {
+      'lvimuser/lsp-inlayhints.nvim',
+      config = function()
+        require 'lsp-inlayhints'.setup()
       end
     }
   end
