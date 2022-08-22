@@ -38,6 +38,28 @@ function M.setup()
   -- Plugins
   local function plugins(use)
     use 'wbthomason/packer.nvim' --package manager
+    -- UTILS
+    use 'jiangmiao/auto-pairs'
+    use 'voldikss/vim-floaterm'
+    use 'folke/lua-dev.nvim'
+    use 'p00f/nvim-ts-rainbow'
+    use {
+      'nvim-treesitter/nvim-treesitter',
+      run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+      config = function()
+        require 'nvim-treesitter.configs'.setup {
+          ensure_installed = { "tsx", "lua", "typescript", "python", "graphql", "json", "jsdoc", "json5", "markdown",
+            "prisma", "javascript" },
+          auto_install = true,
+          highlight = { enable = true },
+          rainbow = {
+            enable = true,
+            extended_mode = true,
+            max_file_lines = nil
+          }
+        }
+      end
+    }
     use {
       'kyazdani42/nvim-tree.lua',
       requires={'kyazdani42/nvim-web-devicons'},
@@ -46,6 +68,40 @@ function M.setup()
         require'max.plugins.nvim-tree'.setup()
       end
     }
+    use {
+      'numToStr/Comment.nvim',
+      config=function()
+        require'Comment'.setup()
+      end
+    }
+    use {
+      'nvim-telescope/telescope.nvim', tag = '0.1.0',
+      -- or                            , branch = '0.1.x',
+      requires = { { 'nvim-lua/plenary.nvim' } },
+      config = function()
+        require 'telescope'.setup {}
+        require('telescope').load_extension('fzf')
+      end
+    }
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
+
+    -- UI
+    use {
+      'akinsho/bufferline.nvim',
+      tag = "v2.*",
+      requires = 'kyazdani42/nvim-web-devicons',
+      config = function()
+        require('bufferline').setup()
+      end
+    }
+    use {
+      'lewis6991/gitsigns.nvim',
+      config = function()
+        require 'gitsigns'.setup()
+      end
+    }
+    -- LSP
   end
 
   if packer_bootstrap then
