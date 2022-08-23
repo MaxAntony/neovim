@@ -77,7 +77,15 @@ lsp['pyright'].setup {
   on_attach = on_attach,
   flags = lsp_flags,
 }
+
+lsp['denols'].setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  root_dir = lsp.util.root_pattern('deno.json', 'deno.jsonc')
+}
+
 lsp['tsserver'].setup {
+  root_dir = lsp.util.root_pattern('package.json'),
   capabilities = capabilities,
   on_attach = on_attach,
   flags = lsp_flags,
