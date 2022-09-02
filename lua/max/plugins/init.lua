@@ -81,12 +81,16 @@ function M.setup()
     use "folke/lua-dev.nvim"
 
     -- UTILS
-    use 'jiangmiao/auto-pairs'
+    use {
+      "windwp/nvim-autopairs",
+      config = function() require("nvim-autopairs").setup {} end
+    }
+    use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
     use 'voldikss/vim-floaterm'
     use 'p00f/nvim-ts-rainbow'
     use {
       'nvim-treesitter/nvim-treesitter',
-      run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+      run = ':TSUpdate',
       config = function()
         require 'nvim-treesitter.configs'.setup {
           ensure_installed = { "tsx", "lua", "typescript", "python", "graphql", "json", "jsdoc", "json5", "markdown",
@@ -99,6 +103,11 @@ function M.setup()
             max_file_lines = nil
           }
         }
+        require('ufo').setup({
+          provider_selector = function(bufnr, filetype, buftype)
+            return { 'treesitter', 'indent' }
+          end
+        })
       end
     }
     use {
@@ -125,6 +134,12 @@ function M.setup()
       end
     }
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    use {
+      "folke/which-key.nvim",
+      config = function()
+        require("which-key").setup {}
+      end
+    }
 
 
     -- UI
@@ -178,6 +193,12 @@ function M.setup()
       'lvimuser/lsp-inlayhints.nvim',
       config = function()
         require 'lsp-inlayhints'.setup()
+      end
+    }
+    use {
+      'anuvyklack/pretty-fold.nvim',
+      config = function()
+        require('pretty-fold').setup {}
       end
     }
   end
