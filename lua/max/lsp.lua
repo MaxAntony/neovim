@@ -11,7 +11,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   require 'lsp-format'.on_attach(client)
-  require 'lsp-inlayhints'.on_attach(bufnr, client)
+  require 'lsp-inlayhints'.on_attach(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
@@ -127,6 +127,58 @@ lsp['rust_analyzer'].setup {
 }
 
 lsp['jsonls'].setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    json = {
+      -- Schemas https://www.schemastore.org
+      schemas = {
+        {
+          fileMatch = { "package.json" },
+          url = "https://json.schemastore.org/package.json"
+        },
+        {
+          fileMatch = { "tsconfig*.json" },
+          url = "https://json.schemastore.org/tsconfig.json"
+        },
+        {
+          fileMatch = {
+            ".prettierrc",
+            ".prettierrc.json",
+            "prettier.config.json"
+          },
+          url = "https://json.schemastore.org/prettierrc.json"
+        },
+        {
+          fileMatch = { ".eslintrc", ".eslintrc.json" },
+          url = "https://json.schemastore.org/eslintrc.json"
+        },
+        {
+          fileMatch = { ".babelrc", ".babelrc.json", "babel.config.json" },
+          url = "https://json.schemastore.org/babelrc.json"
+        },
+        {
+          fileMatch = { "lerna.json" },
+          url = "https://json.schemastore.org/lerna.json"
+        },
+        {
+          fileMatch = { "now.json", "vercel.json" },
+          url = "https://json.schemastore.org/now.json"
+        },
+        {
+          fileMatch = {
+            ".stylelintrc",
+            ".stylelintrc.json",
+            "stylelint.config.json"
+          },
+          url = "http://json.schemastore.org/stylelintrc.json"
+        }
+      }
+    }
+  }
+}
+
+lsp['tailwindcss'].setup {
   capabilities = capabilities,
   on_attach = on_attach
 }
