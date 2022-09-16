@@ -14,11 +14,11 @@ map("n", "<Leader>e", ":NvimTreeToggle<cr>")
 -- floatTerm
 map('n', '<Leader>te', ':FloatermToggle<cr>')
 -- telescope
-map('n', '<leader>ff', '<cmd>lua require(\'telescope.builtin\').find_files()<cr>')
-map('n', '<leader>fg', '<cmd>lua require(\'telescope.builtin\').live_grep()<cr>')
+map('n', '<leader>ff', ':NvimTreeClose<cr>:lua require(\'telescope.builtin\').find_files()<cr>')
+map('n', '<leader>fg', ':NvimTreeClose<cr>:lua require(\'telescope.builtin\').live_grep()<cr>')
 map('n', '<leader>fb',
-  '<cmd>lua require(\'telescope.builtin\').buffers({ sort_mru = true, ignore_current_buffer = true })<cr>')
-map('n', '<leader>fh', '<cmd>lua require(\'telescope.builtin\').help_tags()<cr>')
+  ':NvimTreeClose<cr>:lua require(\'telescope.builtin\').buffers({ sort_mru = true, ignore_current_buffer = true })<cr>')
+map('n', '<leader>fh', ':NvimTreeClose<cr>:lua require(\'telescope.builtin\').help_tags()<cr>')
 -- switch buffer
 map("n", "<S-h>", ":bprevious<CR>")
 map("n", "<S-l>", ":bnext<CR>")
