@@ -38,29 +38,30 @@ function M.setup()
   -- Plugins
   local function plugins(use)
     use 'wbthomason/packer.nvim' --package manager
+
     -- LSP
-    use {
-      'neovim/nvim-lspconfig',
-      requires = {
-        'j-hui/fidget.nvim'
-      }
-    }
     use {
       'williamboman/mason.nvim',
       config = function()
-        require 'mason'.setup()
+        require('mason').setup()
       end
     }
     use {
       'williamboman/mason-lspconfig.nvim',
+      requires = { 'mason.nvim' },
       config = function()
-        require 'mason-lspconfig'.setup()
+        require('mason-lspconfig').setup({
+          automatic_installation = true
+        })
       end
     }
     use {
-      'lukas-reineke/lsp-format.nvim',
+      'neovim/nvim-lspconfig',
+      requires = {
+        'j-hui/fidget.nvim',
+      },
       config = function()
-        require 'lsp-format'.setup()
+        require('max.plugins.nvim-lspconfig').setup()
       end
     }
     use {
@@ -79,15 +80,28 @@ function M.setup()
       end
     }
     use "folke/lua-dev.nvim"
+    use {
+      'jose-elias-alvarez/null-ls.nvim',
+      requires = 'nvim-lua/plenary.nvim',
+      config = function()
+        require('max.plugins.null-ls').setup()
+      end
+    }
 
     -- UTILS
     use {
       "windwp/nvim-autopairs",
       config = function() require("nvim-autopairs").setup {} end
     }
-    use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
+    use {
+      'kevinhwang91/nvim-ufo',
+      requires = 'kevinhwang91/promise-async',
+      config = function()
+        require('ufo').setup()
+      end
+    }
     use 'voldikss/vim-floaterm'
-    use 'p00f/nvim-ts-rainbow'
+    use { 'p00f/nvim-ts-rainbow', requires = 'nvim-treesitter' }
     use {
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate',
@@ -103,11 +117,6 @@ function M.setup()
             max_file_lines = nil
           }
         }
-        require('ufo').setup({
-          provider_selector = function(bufnr, filetype, buftype)
-            return { 'treesitter', 'indent' }
-          end
-        })
       end
     }
     use {
@@ -201,6 +210,24 @@ function M.setup()
         require('pretty-fold').setup {}
       end
     }
+    use {
+      'rrethy/vim-illuminate',
+      requires = 'nvim-lspconfig',
+      config = function()
+        require('illuminate').configure({
+          filetypes_denylist = {
+            'NvimTree',
+            'floaterm'
+          }
+        })
+      end
+    }
+    --[[ use {
+      'NvChad/nvim-colorizer.lua',
+      config=function ()
+        require('colorizer').setup()
+      end
+    } ]]
   end
 
   if packer_bootstrap then
