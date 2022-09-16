@@ -152,14 +152,14 @@ function M.setup()
 
 
     -- UI
-    use {
+--[[     use {
       'akinsho/bufferline.nvim',
       tag = "v2.*",
       requires = 'kyazdani42/nvim-web-devicons',
       config = function()
         require('bufferline').setup()
       end
-    }
+    } ]]
     use {
       'lewis6991/gitsigns.nvim',
       config = function()
