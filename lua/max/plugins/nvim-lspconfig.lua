@@ -1,3 +1,4 @@
+-- revisar https://github.com/neovim/nvim-lspconfig/wiki/Language-specific-plugins
 local M = {}
 function M.setup()
   local languages = { 'graphql', 'prismals', 'tailwindcss', 'angularls', 'cssls', 'bashls', 'dockerls' }

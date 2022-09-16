@@ -15,7 +15,9 @@ function M.setup()
       end
     end,
     sources = {
+      -- install from mason
       require("null-ls").builtins.formatting.prettier,
+      -- fix npm i -g eslint
       require("null-ls").builtins.diagnostics.eslint,
     }
   })

@@ -166,6 +166,7 @@ function M.setup()
         require 'gitsigns'.setup()
       end
     }
+    -- https://github.com/EdenEast/nightfox.nvim tema interesante
     use {
       'navarasu/onedark.nvim',
       config = function()
