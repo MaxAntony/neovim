@@ -1,6 +1,6 @@
-local M={}
+local M = {}
 function M.setup()
-vim.cmd [[
+  vim.cmd [[
 augroup ScrollbarInit
   autocmd!
   autocmd WinScrolled,VimResized,QuitPre * silent! lua require('scrollbar').show()
