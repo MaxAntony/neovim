@@ -225,7 +225,7 @@ function M.setup()
     use {
       'NvChad/nvim-colorizer.lua',
       config = function()
-        require('colorizer').setup()
+        require('max.plugins.nvim-colorizer').setup()
       end
     }
   end
