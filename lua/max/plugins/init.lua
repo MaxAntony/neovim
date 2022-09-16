@@ -222,12 +222,12 @@ function M.setup()
         })
       end
     }
-    --[[ use {
+    use {
       'NvChad/nvim-colorizer.lua',
-      config=function ()
+      config = function()
         require('colorizer').setup()
       end
-    } ]]
+    }
   end
 
   if packer_bootstrap then
