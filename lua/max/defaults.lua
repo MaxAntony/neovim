@@ -45,6 +45,8 @@ vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decr
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+--vim.wo.foldoptions = "nodigits"
+
 
 -- vim.opt.foldmethod     = 'expr'
 -- vim.opt.foldexpr       = 'nvim_treesitter#foldexpr()'
@@ -57,3 +59,11 @@ vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 --   end
 -- })
 ---ENDWORKAROUND
+
+--vim.api.nvim_create_autocmd({ 'BufEnter' }, {
+--  callback = function()
+--    vim.o.foldoptions = 'nodigits'
+--  end
+--})
+
+
