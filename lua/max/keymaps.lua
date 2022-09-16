@@ -16,7 +16,8 @@ map('n', '<Leader>te', ':FloatermToggle<cr>')
 -- telescope
 map('n', '<leader>ff', '<cmd>lua require(\'telescope.builtin\').find_files()<cr>')
 map('n', '<leader>fg', '<cmd>lua require(\'telescope.builtin\').live_grep()<cr>')
-map('n', '<leader>fb', '<cmd>lua require(\'telescope.builtin\').buffers()<cr>')
+map('n', '<leader>fb',
+  '<cmd>lua require(\'telescope.builtin\').buffers({ sort_mru = true, ignore_current_buffer = true })<cr>')
 map('n', '<leader>fh', '<cmd>lua require(\'telescope.builtin\').help_tags()<cr>')
 -- switch buffer
 map("n", "<S-h>", ":bprevious<CR>")
@@ -33,5 +34,5 @@ map('t', '<ESC>', '<C-\\><C-n>')
 
 -- Ufo plugin
 -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+--vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+--vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
