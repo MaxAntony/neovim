@@ -30,7 +30,7 @@ function M.setup()
     -- Automatically run :PackerCompile whenever plugins.lua is updated with an autocommand:
     vim.api.nvim_create_autocmd('BufWritePost', {
       group = vim.api.nvim_create_augroup('PACKER', { clear = true }),
-      pattern = 'plugins.lua',
+      pattern = 'plugins/init.lua',
       command = 'source <afile> | PackerCompile',
     })
   end
@@ -175,7 +175,7 @@ function M.setup()
     }
     use {
       'nvim-lualine/lualine.nvim',
-      requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+      requires = { 'kyazdani42/nvim-web-devicons', 'navarasu/onedark.nvim' },
       config = function()
         require 'max.plugins.lualine'.setup()
       end
@@ -184,12 +184,6 @@ function M.setup()
       'karb94/neoscroll.nvim',
       config = function()
         require 'max.plugins.neoscroll'.setup()
-      end
-    }
-    use {
-      'Xuyuanp/scrollbar.nvim',
-      config = function()
-        require 'max.plugins.scrollbar'.setup()
       end
     }
     use {
@@ -225,8 +219,22 @@ function M.setup()
     }
     use {
       'NvChad/nvim-colorizer.lua',
+      requires = { 'kevinhwang91/nvim-hlslens' },
       config = function()
         require('max.plugins.nvim-colorizer').setup()
+      end
+    }
+    use {
+      'kevinhwang91/nvim-hlslens',
+      config = function()
+        require('max.plugins.hlslens').setup()
+      end
+    }
+    use {
+      'petertriho/nvim-scrollbar',
+      requires = { 'kevinhwang91/nvim-hlslens' },
+      config = function()
+        require('max.plugins.nvim-scrollbar').setup()
       end
     }
   end
