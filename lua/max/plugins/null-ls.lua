@@ -1,26 +1,53 @@
 local M = {}
 function M.setup()
-  local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
-  require('null-ls').setup({
-    on_attach = function(client, bufnr)
-      if client.supports_method("textDocument/formatting") then
-        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          group = augroup,
-          buffer = bufnr,
-          callback = function()
-            vim.lsp.buf.format({ bufnr = bufnr })
-          end,
-        })
-      end
-    end,
-    sources = {
-      -- install from mason
-      require("null-ls").builtins.formatting.prettier,
-      -- fix npm i -g eslint
-      require("null-ls").builtins.diagnostics.eslint,
-    }
-  })
+	local null_ls = require("null-ls")
+
+	local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
+	null_ls.setup({
+		sources = {
+			-- install from mason
+			require("null-ls").builtins.formatting.prettier,
+			-- fix npm i -g eslint
+			require("null-ls").builtins.diagnostics.eslint.with({
+				condition = function(utils)
+					return utils.root_has_file({ "package.json" })
+				end,
+			}),
+			-- http://cspell.org/
+			require("null-ls").builtins.diagnostics.cspell.with({
+				disabled_filetypes = { "NvimTree", "floaterm" },
+				condition = function(utils)
+					return utils.root_has_file({ ".cspell.json" })
+				end,
+				-- disabled_filetypes = { "NvimTree", "floaterm" },
+			}),
+			require("null-ls").builtins.code_actions.cspell.with({
+				condition = function(utils)
+					return utils.root_has_file({ ".cspell.json" })
+				end,
+			}),
+			require("null-ls").builtins.formatting.stylua,
+		},
+
+		on_attach = function(client, bufnr)
+			if client.supports_method("textDocument/formatting") then
+				vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+				vim.api.nvim_create_autocmd("BufWritePre", {
+					group = augroup,
+					buffer = bufnr,
+					callback = function()
+						vim.lsp.buf.format({
+							bufnr = bufnr,
+							-- filter = function(cl)
+							-- 	return cl.name == "null-ls"
+							-- end,
+						})
+					end,
+				})
+			end
+		end,
+	})
 end
 
 return M

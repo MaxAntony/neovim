@@ -4,17 +4,17 @@ local g = vim.g
 local opt = vim.opt
 
 -- Global settings
-cmd "set cursorline"
-cmd "set noshowmode"
+cmd("set cursorline")
+cmd("set noshowmode")
 --cmd "set noshowcmd"
-cmd "set sw=2"
-cmd "set completeopt=menu,menuone,noselect"
-cmd "set tabstop=2"
-cmd "set shiftwidth=2"
-cmd "set expandtab"
-cmd "set smartindent"
+cmd("set sw=2")
+cmd("set completeopt=menu,menuone,noselect")
+cmd("set tabstop=2")
+cmd("set shiftwidth=2")
+cmd("set expandtab")
+cmd("set smartindent")
 
-g.mapleader = ' '
+g.mapleader = " "
 o.background = "dark"
 
 opt.timeoutlen = 300
@@ -32,21 +32,20 @@ opt.signcolumn = "yes" -- Always show sign column
 opt.clipboard = "unnamedplus" -- Access system clipboard
 
 -- Highlight on yank
-vim.cmd [[
+vim.cmd([[
   augroup YankHighlight
     autocmd!
     autocmd TextYankPost * silent! lua vim.highlight.on_yank()
   augroup end
-]]
+]])
 
 -- UFO folding
-vim.o.foldcolumn = '1'
+vim.o.foldcolumn = "1"
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 --vim.wo.foldoptions = "nodigits"
-
 
 -- vim.opt.foldmethod     = 'expr'
 -- vim.opt.foldexpr       = 'nvim_treesitter#foldexpr()'
