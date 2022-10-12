@@ -1,14 +1,17 @@
 {
   "version": "0.2",
   "language": "en,es",
+  "words": [
+    "vimgrep"
+  ],
   "dictionaryDefinitions": [
     {
       "name": "custom-words",
-      "path": "./.cspell/custom-words.txt",
+      "path": "~/.cspell/custom-words.txt",
       "addWords": true
     }
   ],
   "dictionaries": [
-    "spanish"
+    "custom-words"
   ]
 }
