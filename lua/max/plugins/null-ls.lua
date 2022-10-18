@@ -20,6 +20,7 @@ function M.setup()
 				condition = function(utils)
 					return utils.root_has_file({ ".cspell.json" })
 				end,
+				-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md#diagnostics-postprocess
 				diagnostics_postprocess = function(diagnostics)
 					diagnostics.severity = vim.diagnostic.severity["WARN"]
 				end,
@@ -30,6 +31,7 @@ function M.setup()
 					return utils.root_has_file({ ".cspell.json" })
 				end,
 			}),
+			-- https://github.com/JohnnyMorganz/StyLua
 			require("null-ls").builtins.formatting.stylua,
 		},
 
