@@ -20,6 +20,9 @@ function M.setup()
 				condition = function(utils)
 					return utils.root_has_file({ ".cspell.json" })
 				end,
+				diagnostics_postprocess = function(diagnostics)
+					diagnostics.severity = vim.diagnostic.severity["WARN"]
+				end,
 				-- disabled_filetypes = { "NvimTree", "floaterm" },
 			}),
 			require("null-ls").builtins.code_actions.cspell.with({
@@ -39,9 +42,9 @@ function M.setup()
 					callback = function()
 						vim.lsp.buf.format({
 							bufnr = bufnr,
-							-- filter = function(cl)
-							-- 	return cl.name == "null-ls"
-							-- end,
+							filter = function(cl)
+								return cl.name == "null-ls"
+							end,
 						})
 					end,
 				})

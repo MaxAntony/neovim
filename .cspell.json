@@ -1,9 +1,10 @@
 {
+  "useGitignore": true,
+  "numSuggestions": 20,
   "version": "0.2",
-  "language": "en,es",
-  "words": [
-    "vimgrep"
-  ],
+  "language": "en",
+  "ignorePaths": ["node_modules"],
+  "dictionaries": ["custom-words"],
   "dictionaryDefinitions": [
     {
       "name": "custom-words",
@@ -11,7 +12,26 @@
       "addWords": true
     }
   ],
-  "dictionaries": [
-    "custom-words"
+  "words": [
+    "dockerls",
+    "numhl",
+    "noremap",
+    "setloclist",
+    "bufnr",
+    "omnifunc",
+    "bufopts",
+    "sumneko",
+    "pyright",
+    "denols",
+    "bashls",
+    "cssls",
+    "angularls",
+    "prismals",
+    "texthl",
+    "inlayhints",
+    "vimgrep",
+    "nvim",
+    "neodev",
+    "lspconfig"
   ]
 }
