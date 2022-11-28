@@ -3,19 +3,25 @@ function M.setup()
   local null_ls = require("null-ls")
 
   local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+  local builtins = require("null-ls").builtins
 
   null_ls.setup({
     sources = {
       -- install from mason
-      require("null-ls").builtins.formatting.prettier,
+      builtins.formatting.prettier,
       -- fix npm i -g eslint
-      require("null-ls").builtins.diagnostics.eslint.with({
+      builtins.diagnostics.eslint_d.with({
         condition = function(utils)
-          return utils.root_has_file({ "package.json" })
+          return utils.root_has_file(".eslint.json") or utils.root_has_file(".eslintrc.json")
+        end,
+      }),
+      builtins.code_actions.eslint_d.with({
+        condition = function(utils)
+          return utils.root_has_file(".eslint.json") or utils.root_has_file(".eslintrc.json")
         end,
       }),
       -- http://cspell.org/
-      require("null-ls").builtins.diagnostics.cspell.with({
+      builtins.diagnostics.cspell.with({
         disabled_filetypes = { "NvimTree", "floaterm" },
         condition = function(utils)
           return utils.root_has_file({ ".cspell.json" })
@@ -26,13 +32,13 @@ function M.setup()
         end,
         -- disabled_filetypes = { "NvimTree", "floaterm" },
       }),
-      require("null-ls").builtins.code_actions.cspell.with({
+      builtins.code_actions.cspell.with({
         condition = function(utils)
           return utils.root_has_file({ ".cspell.json" })
         end,
       }),
       -- https://github.com/JohnnyMorganz/StyLua
-      require("null-ls").builtins.formatting.stylua,
+      builtins.formatting.stylua,
     },
 
     on_attach = function(client, bufnr)
