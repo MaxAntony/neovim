@@ -23,6 +23,7 @@ function M.setup()
       "tailwindcss-language-server",
       "typescript-language-server",
     },
+    start_delay = 3000,
   })
 end
 
