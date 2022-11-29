@@ -56,6 +56,13 @@ function M.setup()
       end,
     })
     use({
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      requires = { "mason.nvim" },
+      config = function()
+        require("max.plugins.mason-tool-installer").setup()
+      end,
+    })
+    use({
       "neovim/nvim-lspconfig",
       requires = {
         "j-hui/fidget.nvim",
