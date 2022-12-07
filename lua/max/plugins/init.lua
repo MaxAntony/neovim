@@ -160,7 +160,9 @@ function M.setup()
     })
     use({
       "iamcco/markdown-preview.nvim",
-      run = "cd app && npm install",
+      run = function()
+        vim.fn["mkdp#util#install"]()
+      end,
       setup = function()
         vim.g.mkdp_filetypes = { "markdown" }
       end,
