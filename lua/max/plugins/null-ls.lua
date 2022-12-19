@@ -38,7 +38,7 @@ function M.setup()
         end,
       }),
       -- https://github.com/JohnnyMorganz/StyLua
-      builtins.formatting.stylua,
+      -- builtins.formatting.stylua,
     },
 
     on_attach = function(client, bufnr)
@@ -50,9 +50,9 @@ function M.setup()
           callback = function()
             vim.lsp.buf.format({
               bufnr = bufnr,
-              --[[ 							filter = function(cl)
-								return cl.name == "null-ls"
-							end, ]]
+              filter = function(cl)
+                return true
+              end,
             })
           end,
         })
