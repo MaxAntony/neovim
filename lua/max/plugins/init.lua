@@ -104,10 +104,18 @@ function M.setup()
     })
     use({
       "kevinhwang91/nvim-ufo",
-      requires = "kevinhwang91/promise-async",
+      requires = { "kevinhwang91/promise-async", 'nvim-treesitter/nvim-treesitter' },
       config = function()
         -- https://github.com/kevinhwang91/nvim-ufo/issues/4
-        require("ufo").setup()
+        require("ufo").setup({
+          provider_selector = function(bufnr, filetype, buftype)
+            return { 'treesitter', 'indent' }
+          end
+        })
+        vim.o.foldcolumn = '1'
+        vim.o.foldlevel = 99
+        vim.o.foldlevelstart = 99
+        vim.o.foldenable = true
       end,
     })
     use("voldikss/vim-floaterm")
@@ -254,6 +262,15 @@ function M.setup()
         require("max.plugins.nvim-scrollbar").setup()
       end,
     })
+
+    use { "lukas-reineke/indent-blankline.nvim", config = function()
+      require('indent_blankline').setup {
+        show_current_context = true,
+        use_treesitter = true,
+        show_trailing_blankline_indent = false,
+        -- show_current_context_start = true
+      }
+    end }
   end
 
   if packer_bootstrap then
