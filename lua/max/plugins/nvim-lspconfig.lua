@@ -1,7 +1,7 @@
 -- revisar https://github.com/neovim/nvim-lspconfig/wiki/Language-specific-plugins
 local M = {}
 function M.setup()
-  local languages = { "graphql", "prismals", "tailwindcss", "angularls", "cssls", "bashls", "dockerls", "html" }
+  local languages = { "graphql", "prismals", "tailwindcss", "angularls", "cssls", "bashls", "dockerls", "html", 'gopls' }
 
   -- icons to the left bar
   local signs = {
@@ -63,10 +63,10 @@ function M.setup()
   local capabilities = require("cmp_nvim_lsp").default_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   -- for ufo plugin
-  capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true,
-  }
+  -- capabilities.textDocument.foldingRange = {
+  --   dynamicRegistration = false,
+  --   lineFoldingOnly = true,
+  -- }
   -- end
 
   require("neodev").setup({})
@@ -75,6 +75,15 @@ function M.setup()
     on_attach = on_attach,
     settings = {
       Lua = {
+        format = {
+          enable = true,
+          -- Put format options here
+          -- NOTE: the value should be STRING!!
+          defaultConfig = {
+            indent_style = "space",
+            indent_size = "2",
+          }
+        },
         hint = {
           enable = true,
           setType = true,
