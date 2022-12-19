@@ -3,8 +3,12 @@
   "numSuggestions": 20,
   "version": "0.2",
   "language": "en",
-  "ignorePaths": ["node_modules"],
-  "dictionaries": ["custom-words"],
+  "ignorePaths": [
+    "node_modules"
+  ],
+  "dictionaries": [
+    "custom-words"
+  ],
   "dictionaryDefinitions": [
     {
       "name": "custom-words",
@@ -13,6 +17,7 @@
     }
   ],
   "words": [
+    "blankline",
     "dockerls",
     "numhl",
     "noremap",
