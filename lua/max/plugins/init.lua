@@ -150,10 +150,10 @@ function M.setup()
       "nvim-telescope/telescope.nvim",
       tag = "0.1.0",
       -- or                            , branch = '0.1.x',
-      requires = { { "nvim-lua/plenary.nvim" } },
+      requires = { { "nvim-lua/plenary.nvim" ,"nvim-telescope/telescope-fzf-native.nvim"} },
       config = function()
         require("max.plugins.nvim-telescope").setup()
-        require("telescope").load_extension("fzf")
+        -- require("telescope").load_extension("fzf")
       end,
     })
     use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
@@ -199,6 +199,7 @@ function M.setup()
         require("max.plugins.onedark").setup()
       end,
     })
+    use {'morhetz/gruvbox'}
     use({
       "nvim-lualine/lualine.nvim",
       requires = { "kyazdani42/nvim-web-devicons", "navarasu/onedark.nvim" },
