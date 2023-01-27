@@ -119,7 +119,8 @@ function M.setup()
       end,
     })
     use('voldikss/vim-floaterm')
-    use({ 'p00f/nvim-ts-rainbow', requires = 'nvim-treesitter' })
+    --    https://github.com/mrjones2014/nvim-ts-rainbow
+    use({ 'https://gitlab.com/HiPhish/nvim-ts-rainbow2', requires = 'nvim-treesitter' })
     use({
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate',
