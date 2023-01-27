@@ -1,19 +1,19 @@
 local M = {}
 function M.setup()
-  require("nvim-treesitter.configs").setup({
+  require('nvim-treesitter.configs').setup({
     ensure_installed = {
-      "tsx",
-      "html",
-      "lua",
-      "typescript",
-      "python",
-      "graphql",
-      "json",
-      "jsdoc",
-      "json5",
-      "markdown",
-      "prisma",
-      "javascript",
+      'tsx',
+      'html',
+      'lua',
+      'typescript',
+      'python',
+      'graphql',
+      'json',
+      'jsdoc',
+      'json5',
+      'markdown',
+      'prisma',
+      'javascript',
     },
     auto_install = true,
     highlight = { enable = true },

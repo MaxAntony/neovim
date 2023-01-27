@@ -1,86 +1,86 @@
 local M = {}
 
 function M.setup()
-  require("scrollbar").setup({
+  require('scrollbar').setup({
     show = true,
     show_in_active_only = false,
     set_highlights = true,
     folds = 1000, -- handle folds, set to number to disable folds if no. of lines in buffer exceeds this
     max_lines = false, -- disables if no. of lines in buffer exceeds this
     handle = {
-      text = " ",
+      text = ' ',
       color = nil,
       cterm = nil,
-      highlight = "CursorColumn",
+      highlight = 'CursorColumn',
       hide_if_all_visible = true, -- Hides handle if all lines are visible
     },
     marks = {
       Search = {
-        text = { "-", "=" },
+        text = { '-', '=' },
         priority = 0,
-        color = "#f7ec00",
+        color = '#f7ec00',
         cterm = nil,
-        highlight = "Search",
+        highlight = 'Search',
       },
       Error = {
-        text = { "-", "=" },
+        text = { '-', '=' },
         priority = 1,
         color = nil,
         cterm = nil,
-        highlight = "DiagnosticVirtualTextError",
+        highlight = 'DiagnosticVirtualTextError',
       },
       Warn = {
-        text = { "-", "=" },
+        text = { '-', '=' },
         priority = 2,
         color = nil,
         cterm = nil,
-        highlight = "DiagnosticVirtualTextWarn",
+        highlight = 'DiagnosticVirtualTextWarn',
       },
       Info = {
-        text = { "-", "=" },
+        text = { '-', '=' },
         priority = 3,
         color = nil,
         cterm = nil,
-        highlight = "DiagnosticVirtualTextInfo",
+        highlight = 'DiagnosticVirtualTextInfo',
       },
       Hint = {
-        text = { "-", "=" },
+        text = { '-', '=' },
         priority = 4,
         color = nil,
         cterm = nil,
-        highlight = "DiagnosticVirtualTextHint",
+        highlight = 'DiagnosticVirtualTextHint',
       },
       Misc = {
-        text = { "-", "=" },
+        text = { '-', '=' },
         priority = 5,
         color = nil,
         cterm = nil,
-        highlight = "Normal",
+        highlight = 'Normal',
       },
     },
     excluded_buftypes = {
-      "terminal",
+      'terminal',
     },
     excluded_filetypes = {
-      "prompt",
-      "TelescopePrompt",
+      'prompt',
+      'TelescopePrompt',
     },
     autocmd = {
       render = {
-        "BufWinEnter",
-        "TabEnter",
-        "TermEnter",
-        "WinEnter",
-        "CmdwinLeave",
-        "TextChanged",
-        "VimResized",
-        "WinScrolled",
+        'BufWinEnter',
+        'TabEnter',
+        'TermEnter',
+        'WinEnter',
+        'CmdwinLeave',
+        'TextChanged',
+        'VimResized',
+        'WinScrolled',
       },
       clear = {
-        "BufWinLeave",
-        "TabLeave",
-        "TermLeave",
-        "WinLeave",
+        'BufWinLeave',
+        'TabLeave',
+        'TermLeave',
+        'WinLeave',
       },
     },
     handlers = {

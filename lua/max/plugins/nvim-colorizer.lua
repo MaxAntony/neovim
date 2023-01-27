@@ -1,15 +1,15 @@
 local M = {}
 function M.setup()
-  require("colorizer").setup({
+  require('colorizer').setup({
     {
-      "scss",
+      'scss',
       typescript = { no_names = true },
-      "css",
-      "javascript",
-      "!floaterm",
-      "!NvimTree",
-      "!Telescope",
-      "!mason",
+      'css',
+      'javascript',
+      '!floaterm',
+      '!NvimTree',
+      '!Telescope',
+      '!mason',
     },
   })
 end

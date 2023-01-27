@@ -4,18 +4,18 @@ local g = vim.g
 local opt = vim.opt
 
 -- Global settings
-cmd("set cursorline")
-cmd("set noshowmode")
+cmd('set cursorline')
+cmd('set noshowmode')
 --cmd "set noshowcmd"
-cmd("set sw=2")
-cmd("set completeopt=menu,menuone,noselect")
-cmd("set tabstop=2")
-cmd("set shiftwidth=2")
-cmd("set expandtab")
-cmd("set smartindent")
+cmd('set sw=2')
+cmd('set completeopt=menu,menuone,noselect')
+cmd('set tabstop=2')
+cmd('set shiftwidth=2')
+cmd('set expandtab')
+cmd('set smartindent')
 
-g.mapleader = " "
-o.background = "dark"
+g.mapleader = ' '
+o.background = 'dark'
 
 opt.timeoutlen = 300
 opt.termguicolors = true -- Enable colors in terminal
@@ -28,9 +28,9 @@ opt.undofile = true --Save undo history
 opt.ignorecase = true --Case insensitive searching unless /C or capital in search
 opt.smartcase = true -- Smart case
 opt.updatetime = 250 --Decrease update time
-opt.signcolumn = "yes" -- Always show sign column
-opt.clipboard = "unnamedplus" -- Access system clipboard
-opt.scrolloff=8
+opt.signcolumn = 'yes' -- Always show sign column
+opt.clipboard = 'unnamedplus' -- Access system clipboard
+opt.scrolloff = 8
 
 -- Highlight on yank
 vim.cmd([[
@@ -41,12 +41,12 @@ vim.cmd([[
 ]])
 
 -- UFO folding
-vim.o.foldcolumn = "1"
+vim.o.foldcolumn = '1'
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
-vim.o.fillchars =[[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-vim.o.statuscolumn = "%=%l%s%C"
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.o.statuscolumn = '%=%l%s%C'
 --vim.wo.foldoptions = "nodigits"
 
 -- vim.opt.foldmethod     = 'expr'
