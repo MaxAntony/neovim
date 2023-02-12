@@ -21,6 +21,7 @@ function M.setup()
         end,
       }),
       -- http://cspell.org/
+      -- si no lanza revisar si se tiene custom-words.txt o ejecutarlo en la terminar y ver el resultado
       builtins.diagnostics.cspell.with({
         disabled_filetypes = { 'NvimTree', 'floaterm' },
         condition = function(utils)
