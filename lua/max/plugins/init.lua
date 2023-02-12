@@ -5,6 +5,13 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'JoosepAlviste/nvim-ts-context-commentstring',
   {
+    'olimorris/onedarkpro.nvim',
+    priority = 1000, --ensure it loads first
+    config = function()
+      vim.cmd('colorscheme onedark')
+    end,
+  },
+  {
     'kyazdani42/nvim-tree.lua',
     dependencies = { 'kyazdani42/nvim-web-devicons' },
     tag = 'nightly',
@@ -155,14 +162,8 @@ require('lazy').setup({
 
   -- https://github.com/EdenEast/nightfox.nvim tema interesante
   {
-    'navarasu/onedark.nvim',
-    config = function()
-      require('max.plugins.onedark').setup()
-    end,
-  },
-  {
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'kyazdani42/nvim-web-devicons', 'navarasu/onedark.nvim' },
+    dependencies = { 'kyazdani42/nvim-web-devicons' },
     config = function()
       require('max.plugins.lualine').setup()
     end,
