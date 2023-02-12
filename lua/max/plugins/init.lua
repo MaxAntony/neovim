@@ -5,10 +5,9 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'JoosepAlviste/nvim-ts-context-commentstring',
   {
-    'olimorris/onedarkpro.nvim',
-    priority = 1000, --ensure it loads first
+    'navarasu/onedark.nvim',
     config = function()
-      vim.cmd('colorscheme onedark')
+      require('max.plugins.onedark').setup()
     end,
   },
   {
