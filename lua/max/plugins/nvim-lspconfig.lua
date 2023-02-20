@@ -1,8 +1,18 @@
 -- revisar https://github.com/neovim/nvim-lspconfig/wiki/Language-specific-plugins
 local M = {}
 function M.setup()
-  local languages =
-    { 'graphql', 'prismals', 'tailwindcss', 'angularls', 'cssls', 'bashls', 'dockerls', 'html', 'gopls' }
+  local languages = {
+    'graphql',
+    'prismals',
+    'tailwindcss',
+    'angularls',
+    'cssls',
+    'bashls',
+    'dockerls',
+    'html',
+    'gopls',
+    'docker_compose_language_service',
+  }
 
   -- icons to the left bar
   local signs = {
@@ -64,10 +74,10 @@ function M.setup()
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   -- for ufo plugin
-  -- capabilities.textDocument.foldingRange = {
-  --   dynamicRegistration = false,
-  --   lineFoldingOnly = true,
-  -- }
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+  }
   -- end
 
   require('neodev').setup({})
@@ -115,6 +125,13 @@ function M.setup()
     capabilities = capabilities,
     root_dir = lsp.util.root_pattern('deno.json', 'deno.jsonc'),
     single_file_support = false,
+    settings = {
+      deno = {
+        inlayHints = {
+          enumMemberValues = true,
+        },
+      },
+    },
   })
 
   lsp['tsserver'].setup({
@@ -217,6 +234,8 @@ function M.setup()
       },
     },
   })
+
+  require('ufo').setup()
 end
 
 return M
