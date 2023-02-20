@@ -81,14 +81,14 @@ require('lazy').setup({
   },
   {
     'kevinhwang91/nvim-ufo',
-    dependencies = { 'kevinhwang91/promise-async', 'nvim-treesitter/nvim-treesitter' },
+    dependencies = { 'kevinhwang91/promise-async' },
     config = function()
       -- https://github.com/kevinhwang91/nvim-ufo/issues/4
-      require('ufo').setup({
-        provider_selector = function(bufnr, filetype, buftype)
-          return { 'treesitter', 'indent' }
-        end,
-      })
+      -- require('ufo').setup({
+      --   provider_selector = function(bufnr, filetype, buftype)
+      --     return { 'treesitter', 'indent' }
+      --   end,
+      -- })
       vim.o.foldcolumn = '1'
       vim.o.foldlevel = 99
       vim.o.foldlevelstart = 99
@@ -99,7 +99,7 @@ require('lazy').setup({
   { 'https://gitlab.com/HiPhish/nvim-ts-rainbow2', dependencies = 'nvim-treesitter' },
   {
     'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
+    -- build = ':TSUpdate',
     config = function()
       require('max.plugins.nvim-treesitter').setup()
     end,
