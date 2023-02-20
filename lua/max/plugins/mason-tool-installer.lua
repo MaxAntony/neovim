@@ -7,7 +7,7 @@ function M.setup()
       'bash-language-server',
       'cspell',
       'css-lsp',
-      'deno',
+      -- 'deno',
       'dockerfile-language-server',
       'eslint_d',
       'graphql-language-service-cli',
@@ -22,6 +22,7 @@ function M.setup()
       'stylua',
       'tailwindcss-language-server',
       'typescript-language-server',
+      'docker-compose-language-service',
     },
     start_delay = 3000,
   })
