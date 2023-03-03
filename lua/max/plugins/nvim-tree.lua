@@ -19,11 +19,12 @@ function M.setup()
     remove_keymaps = false,
     select_prompts = false,
     view = {
+      adaptive_size = true,
       centralize_selection = false,
       cursorline = true,
       debounce_delay = 15,
       width = 30,
-      hide_root_folder = false,
+      hide_root_folder = true,
       side = 'left',
       preserve_window_proportions = false,
       number = false,
@@ -70,7 +71,7 @@ function M.setup()
       },
       icons = {
         webdev_colors = true,
-        git_placement = 'before',
+        git_placement = 'after',
         modified_placement = 'after',
         padding = ' ',
         symlink_arrow = ' ➛ ',
@@ -115,7 +116,7 @@ function M.setup()
       auto_open = true,
     },
     update_focused_file = {
-      enable = false,
+      enable = true,
       update_root = false,
       ignore_list = {},
     },
@@ -141,10 +142,10 @@ function M.setup()
       },
     },
     filters = {
-      dotfiles = false,
+      dotfiles = true,
       git_clean = false,
       no_buffer = false,
-      custom = {},
+      custom = { '.git$' },
       exclude = {},
     },
     filesystem_watchers = {
@@ -185,7 +186,7 @@ function M.setup()
         },
       },
       open_file = {
-        quit_on_open = false,
+        quit_on_open = true,
         resize_window = true,
         window_picker = {
           enable = true,
