@@ -31,6 +31,9 @@ opt.updatetime = 250 --Decrease update time
 opt.signcolumn = 'yes' -- Always show sign column
 opt.clipboard = 'unnamedplus' -- Access system clipboard
 opt.scrolloff = 8
+-- nvim-tree
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
 
 -- Highlight on yank
 vim.cmd([[
@@ -47,7 +50,7 @@ vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 vim.o.statuscolumn = '%=%l%s%C'
---vim.wo.foldoptions = "nodigits"
+-- vim.wo.foldoptions = 'nodigits'
 
 -- vim.opt.foldmethod     = 'expr'
 -- vim.opt.foldexpr       = 'nvim_treesitter#foldexpr()'

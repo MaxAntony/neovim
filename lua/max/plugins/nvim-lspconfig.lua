@@ -1,6 +1,11 @@
 -- revisar https://github.com/neovim/nvim-lspconfig/wiki/Language-specific-plugins
 local M = {}
 function M.setup()
+  require('mason').setup()
+  require('mason-lspconfig').setup({
+    automatic_installation = true,
+  })
+
   local languages = {
     'graphql',
     'prismals',
@@ -66,10 +71,6 @@ function M.setup()
 		end, bufopts) ]]
   end
 
-  local lsp_flags = {
-    -- This is the default in Nvim 0.7+
-    debounce_text_changes = 150,
-  }
   local lsp = require('lspconfig')
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -117,28 +118,58 @@ function M.setup()
   lsp['pyright'].setup({
     capabilities = capabilities,
     on_attach = on_attach,
-    flags = lsp_flags,
   })
 
+  local denols_root_files = {
+    'deno.json',
+    'deno.jsonc',
+  }
   lsp['denols'].setup({
-    on_attach = on_attach,
+    root_dir = function(fname)
+      local primary = lsp.util.root_pattern(unpack(denols_root_files))(fname)
+      return primary
+    end,
     capabilities = capabilities,
-    root_dir = lsp.util.root_pattern('deno.json', 'deno.jsonc'),
+    on_attach = on_attach,
     single_file_support = false,
     settings = {
-      deno = {
-        inlayHints = {
-          enumMemberValues = true,
+      settings = {
+        deno = {
+          enable = true,
+          suggest = {
+            imports = {
+              hosts = {
+                ['https://crux.land'] = true,
+                ['https://deno.land'] = true,
+                ['https://x.nest.land'] = true,
+              },
+            },
+          },
         },
       },
     },
+    -- settings = {
+    --   deno = {
+    --     inlayHints = {
+    --       enumMemberValues = true,
+    --     },
+    --   },
+    -- },
   })
 
+  local tsserver_root_files = {
+    'package.json',
+    'package-lock.json',
+    'tsconfig.json',
+  }
   lsp['tsserver'].setup({
-    root_dir = lsp.util.root_pattern('package.json'),
+    root_dir = function(fname)
+      local primary = lsp.util.root_pattern(unpack(tsserver_root_files))(fname)
+      return primary
+    end,
     capabilities = capabilities,
     on_attach = on_attach,
-    flags = lsp_flags,
+    single_file_support = false,
     settings = {
       javascript = {
         inlayHints = {
@@ -168,7 +199,6 @@ function M.setup()
   lsp['rust_analyzer'].setup({
     capabilities = capabilities,
     on_attach = on_attach,
-    flags = lsp_flags,
     -- Server-specific settings...
     settings = {
       ['rust-analyzer'] = {},
@@ -192,7 +222,7 @@ function M.setup()
           },
           {
             fileMatch = { 'deno.json', 'deno.jsonc' },
-            url = 'https://deno.land/x/deno@v1.25.2/cli/schemas/config-file.v1.json',
+            url = 'https://deno.land/x/deno@v1.30.3/cli/schemas/config-file.v1.json',
           },
           {
             fileMatch = {
@@ -234,8 +264,6 @@ function M.setup()
       },
     },
   })
-
-  require('ufo').setup()
 end
 
 return M

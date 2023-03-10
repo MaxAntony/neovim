@@ -1,5 +1,6 @@
 require('lazy').setup({
   'folke/which-key.nvim',
+
   'folke/neodev.nvim',
   'voldikss/vim-floaterm',
   'tpope/vim-fugitive',
@@ -11,39 +12,25 @@ require('lazy').setup({
     end,
   },
   {
-    'kyazdani42/nvim-tree.lua',
-    dependencies = { 'kyazdani42/nvim-web-devicons' },
-    tag = 'nightly',
-    config = function()
-      require('max.plugins.nvim-tree').setup()
-    end,
-  },
-  {
     'williamboman/mason.nvim',
-    config = function()
-      require('mason').setup()
-    end,
   },
   {
     'williamboman/mason-lspconfig.nvim',
-    dependencies = { 'mason.nvim' },
-    config = function()
-      require('mason-lspconfig').setup({
-        automatic_installation = true,
-      })
-    end,
+    dependencies = { 'williamboman/mason.nvim' },
   },
-  {
-    'WhoIsSethDaniel/mason-tool-installer.nvim',
-    dependencies = { 'mason.nvim' },
-    config = function()
-      require('max.plugins.mason-tool-installer').setup()
-    end,
-  },
+  -- {
+  --   'WhoIsSethDaniel/mason-tool-installer.nvim',
+  --   dependencies = { 'williamboman/mason.nvim' },
+  --   config = function()
+  --     require('max.plugins.mason-tool-installer').setup()
+  --   end,
+  -- },
   {
     'neovim/nvim-lspconfig',
     dependencies = {
       'j-hui/fidget.nvim',
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
     },
     config = function()
       require('max.plugins.nvim-lspconfig').setup()
@@ -79,27 +66,13 @@ require('lazy').setup({
       require('nvim-autopairs').setup({})
     end,
   },
-  {
-    'kevinhwang91/nvim-ufo',
-    dependencies = { 'kevinhwang91/promise-async' },
-    config = function()
-      -- https://github.com/kevinhwang91/nvim-ufo/issues/4
-      -- require('ufo').setup({
-      --   provider_selector = function(bufnr, filetype, buftype)
-      --     return { 'treesitter', 'indent' }
-      --   end,
-      -- })
-      vim.o.foldcolumn = '1'
-      vim.o.foldlevel = 99
-      vim.o.foldlevelstart = 99
-      vim.o.foldenable = true
-    end,
-  },
   --    https://github.com/mrjones2014/nvim-ts-rainbow
-  { 'https://gitlab.com/HiPhish/nvim-ts-rainbow2', dependencies = 'nvim-treesitter' },
+  -- { 'p00f/nvim-ts-rainbow', dependencies = 'nvim-treesitter/nvim-treesitter' },
+  -- esta libreria no colorea bien el html y jsx, abrir un issue por que la libreria implemente la funcion anterior
+  { 'https://gitlab.com/HiPhish/nvim-ts-rainbow2', dependencies = 'nvim-treesitter/nvim-treesitter' },
   {
     'nvim-treesitter/nvim-treesitter',
-    -- build = ':TSUpdate',
+    build = ':TSUpdate',
     config = function()
       require('max.plugins.nvim-treesitter').setup()
     end,
@@ -233,6 +206,12 @@ require('lazy').setup({
         show_trailing_blankline_indent = false,
         -- show_current_context_start = true
       })
+    end,
+  },
+  {
+    'luukvbaal/statuscol.nvim',
+    config = function()
+      require('statuscol').setup({ foldfunc = 'builtin', setopt = true })
     end,
   },
 })

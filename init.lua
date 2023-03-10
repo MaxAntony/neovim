@@ -11,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('max.defaults')
 require('max.plugins')
+require('max.defaults')
 require('max.keymaps')
 -- https://github.com/Nguyen-Hoang-Nam/nvim-dotfiles-kitty
