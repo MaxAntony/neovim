@@ -1,9 +1,7 @@
 require('lazy').setup({
   'folke/which-key.nvim',
-
   'folke/neodev.nvim',
   'voldikss/vim-floaterm',
-  'tpope/vim-fugitive',
   'JoosepAlviste/nvim-ts-context-commentstring',
   {
     'navarasu/onedark.nvim',
@@ -18,13 +16,13 @@ require('lazy').setup({
     'williamboman/mason-lspconfig.nvim',
     dependencies = { 'williamboman/mason.nvim' },
   },
-  -- {
-  --   'WhoIsSethDaniel/mason-tool-installer.nvim',
-  --   dependencies = { 'williamboman/mason.nvim' },
-  --   config = function()
-  --     require('max.plugins.mason-tool-installer').setup()
-  --   end,
-  -- },
+  {
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    dependencies = { 'williamboman/mason.nvim' },
+    config = function()
+      require('max.plugins.mason-tool-installer').setup()
+    end,
+  },
   {
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -66,8 +64,7 @@ require('lazy').setup({
       require('nvim-autopairs').setup({})
     end,
   },
-  --    https://github.com/mrjones2014/nvim-ts-rainbow
-  -- { 'p00f/nvim-ts-rainbow', dependencies = 'nvim-treesitter/nvim-treesitter' },
+  -- { 'mrjones2014/nvim-ts-rainbow' },
   -- esta libreria no colorea bien el html y jsx, abrir un issue por que la libreria implemente la funcion anterior
   { 'https://gitlab.com/HiPhish/nvim-ts-rainbow2', dependencies = 'nvim-treesitter/nvim-treesitter' },
   {
@@ -112,19 +109,6 @@ require('lazy').setup({
       require('which-key').setup({})
     end,
   },
-
-  -- {
-  -- 'iamcco/markdown-preview.nvim',
-  --  cmd = function()
-  --        vim.fn['mkdp#util#install']()
-  -- end,
-  -- build = function()
-  --   vim.g.mkdp_filetypes = { 'markdown' }
-  -- end,
-  --ft = { 'markdown' },
-  --},
-
-  -- UI
   {
     'lewis6991/gitsigns.nvim',
     config = function()
@@ -209,9 +193,38 @@ require('lazy').setup({
     end,
   },
   {
-    'luukvbaal/statuscol.nvim',
+    'kevinhwang91/nvim-ufo',
+    dependencies = {
+      'kevinhwang91/promise-async',
+      {
+        'luukvbaal/statuscol.nvim',
+        config = function()
+          print('hola')
+          local builtin = require('statuscol.builtin')
+          require('statuscol').setup({
+            wetopt = true,
+            foldfunc = 'builtin',
+            -- relculright = true,
+            -- segments = {
+            --   { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
+            --   { text = { '%s' }, click = 'v:lua.ScSa' },
+            --   { text = { builtin.lnumfunc, ' ' }, click = 'v:lua.ScLa' },
+            -- },
+            -- segments = {
+            --   { text = { '%s' }, click = 'v:lua.ScSa' },
+            --   { text = { builtin.lnumfunc }, click = 'v:lua.ScLa' },
+            --   { text = { ' ', builtin.foldfunc, ' ' }, click = 'v:lua.ScFa' },
+            -- },
+          })
+        end,
+      },
+    },
+  },
+  {
+    'windwp/nvim-ts-autotag',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
-      require('statuscol').setup({ foldfunc = 'builtin', setopt = true })
+      require('nvim-ts-autotag').setup()
     end,
   },
 })
