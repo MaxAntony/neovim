@@ -4,3 +4,4 @@
 - fd
 - xclip
 - ripgrep
+- zip unzip
