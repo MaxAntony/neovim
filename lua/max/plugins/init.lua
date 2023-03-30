@@ -199,7 +199,6 @@ require('lazy').setup({
       {
         'luukvbaal/statuscol.nvim',
         config = function()
-          print('hola')
           local builtin = require('statuscol.builtin')
           require('statuscol').setup({
             wetopt = true,
