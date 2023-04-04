@@ -33,9 +33,9 @@ function M.setup()
   -- Mappings.
   -- See `:help vim.diagnostic.*` for documentation on any of the below functions
   local opts = { noremap = true, silent = true }
-  vim.keymap.set('n', '<Leader>m', vim.diagnostic.open_float, opts)
-  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+  vim.keymap.set('n', '<space>m', vim.diagnostic.open_float, opts)
+  vim.keymap.set('n', ']d', vim.diagnostic.goto_prev, opts)
+  vim.keymap.set('n', '[d', vim.diagnostic.goto_next, opts)
   -- commented by conflict  vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
   -- Use an on_attach function to only map the following keys
@@ -67,7 +67,8 @@ function M.setup()
     vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+    vim.keymap.set('n', 'gr', 'Telescope lsp_references<cr>', bufopts)
+    -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
     --[[ vim.keymap.set("n", "<space>f", function()
 			vim.lsp.buf.format({ async = true })
 		end, bufopts) ]]
