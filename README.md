@@ -5,6 +5,7 @@
 - xclip
 - ripgrep
 - zip unzip
+- ttf-joypixels
 
 ## tips
 

@@ -40,6 +40,7 @@ function M.setup()
       }),
       -- https://github.com/JohnnyMorganz/StyLua
       builtins.formatting.stylua,
+      -- builtins.diagnostics.todo_comments,
     },
 
     on_attach = function(client, bufnr)

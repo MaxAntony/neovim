@@ -1,12 +1,15 @@
 -- revisar https://github.com/neovim/nvim-lspconfig/wiki/Language-specific-plugins
 local M = {}
 function M.setup()
+  local wk = require('which-key')
+
   require('mason').setup()
   require('mason-lspconfig').setup({
     automatic_installation = true,
   })
 
   local languages = {
+    'pyright',
     'graphql',
     'prismals',
     'tailwindcss',
@@ -32,10 +35,11 @@ function M.setup()
 
   -- Mappings.
   -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-  local opts = { noremap = true, silent = true }
-  vim.keymap.set('n', '<space>m', vim.diagnostic.open_float, opts)
-  vim.keymap.set('n', ']d', vim.diagnostic.goto_prev, opts)
-  vim.keymap.set('n', '[d', vim.diagnostic.goto_next, opts)
+  wk.register({
+    ['<space>m'] = { ':lua vim.diagnostic.open_float()<cr>', 'diagnostic open float' },
+    [']d'] = { ':lua vim.diagnostic.goto_prev()<cr>', 'diagnostic go to prev' },
+    ['[d'] = { ':lua vim.diagnostic.goto_next()<cr>', 'diagnostic go to next' },
+  }, { mode = 'n' })
   -- commented by conflict  vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
   -- Use an on_attach function to only map the following keys
@@ -47,28 +51,32 @@ function M.setup()
     vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { link = 'Visual' })
 
     -- Enable completion triggered by <c-x><c-o>
-    require('lsp-inlayhints').on_attach(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', 'gd', ':Telescope lsp_definitions<cr>', bufopts)
+    wk.register({
+      g = {
+        name = 'lsp utils',
+        d = { ':Telescope lsp_definitions<cr>', 'definitions' },
+        r = { ':Telescope lsp_references<cr>', 'references' },
+        i = { ':lua vim.lsp.buf.implementation()<cr>', 'implementations' },
+        D = { ':lua vim.lsp.buf.declaration()<cr>', 'declarations' },
+      },
+      K = { ':lua vim.lsp.buf.hover()<cr>', 'hover' },
+      ['<space>'] = {
+        rn = { ':lua vim.lsp.buf.rename()<cr>', 'lsp rename' },
+        ca = { ':lua vim.lsp.buf.code_action()<cr>', 'lsp code actions' },
+        D = { ':lua vim.lsp.buf.type_definition()<cr>', 'lsp type definition' },
+      },
+      ['<C-k>'] = { ':lua vim.lsp.buf.signature_help()<cr>', 'lsp signature help' },
+    }, { mode = 'n', buffer = bufnr })
     -- the same as above but the window for select the correct definition closes after select
-    -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
     -- vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
     -- vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
     -- vim.keymap.set('n', '<space>wl', function()
     -- print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     -- end, bufopts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', 'gr', 'Telescope lsp_references<cr>', bufopts)
-    -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
     --[[ vim.keymap.set("n", "<space>f", function()
 			vim.lsp.buf.format({ async = true })
 		end, bufopts) ]]
@@ -83,6 +91,27 @@ function M.setup()
     lineFoldingOnly = true,
   }
   -- end
+  for _, lang in ipairs(languages) do
+    lsp[lang].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
+    if lang == 'tailwindcss' then
+      lsp[lang].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+          tailwindCSS = {
+            -- custom "Styles" for completion in declarations like `let sizeStyles = "intellisense here working"`
+            -- https://github.com/tailwindlabs/tailwindcss/discussions/7554
+            -- https://kimmo.blog/posts/6-advanced-typescript-the-ultimate-tailwind-typings/
+            classAttributes = { 'class', 'className', 'ngClass', '.*Styles*' },
+          },
+        },
+      })
+    end
+  end
 
   require('neodev').setup({})
   lsp.lua_ls.setup({
@@ -90,6 +119,9 @@ function M.setup()
     on_attach = on_attach,
     settings = {
       Lua = {
+        workspace = {
+          checkThirdParty = false,
+        },
         format = {
           enable = true,
           -- Put format options here
@@ -108,19 +140,6 @@ function M.setup()
         },
       },
     },
-  })
-
-  for _, lang in ipairs(languages) do
-    -- for angular install @angular/language-server as dev dependency in your project
-    lsp[lang].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-  end
-
-  lsp['pyright'].setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
   })
 
   local denols_root_files = {
@@ -160,6 +179,20 @@ function M.setup()
     -- },
   })
 
+  local function organize_imports()
+    local params = {
+      command = '_typescript.organizeImports',
+      arguments = { vim.api.nvim_buf_get_name(0) },
+      title = '',
+    }
+    vim.lsp.buf.execute_command(params)
+  end
+
+  -- https://github.com/lvimuser/lsp-inlayhints.nvim#configuration
+  -- https://github.com/jose-elias-alvarez/typescript.nvim
+  -- https://www.reddit.com/r/neovim/comments/107r1qw/sort_imports/
+  -- https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
+  -- https://www.reddit.com/r/neovim/comments/lwz8l7/how_to_use_tsservers_organize_imports_with_nvim/
   local tsserver_root_files = {
     'package.json',
     'package-lock.json',
@@ -173,6 +206,12 @@ function M.setup()
     capabilities = capabilities,
     on_attach = on_attach,
     single_file_support = false,
+    commands = {
+      OrganizeImports = {
+        organize_imports,
+        description = 'Organize Imports',
+      },
+    },
     settings = {
       javascript = {
         inlayHints = {
@@ -268,7 +307,43 @@ function M.setup()
     },
   })
 
-  require('ufo').setup()
+  -- UFO folding
+  local ftMap = {
+    vim = 'indent',
+    python = { 'indent' },
+    git = '',
+    NvimTree = '',
+    Telescope = '',
+    ToggleTerm = '',
+    dashboard = '',
+    startup = '',
+  }
+
+  local function customizeSelector(bufnr)
+    local function handleFallbackException(err, providerName)
+      if type(err) == 'string' and err:match('UfoFallbackException') then
+        return require('ufo').getFolds(bufnr, providerName)
+      else
+        return require('promise').reject(err)
+      end
+    end
+
+    return require('ufo')
+      .getFolds(bufnr, 'lsp')
+      :catch(function(err)
+        return handleFallbackException(err, 'treesitter')
+      end)
+      :catch(function(err)
+        return handleFallbackException(err, 'indent')
+      end)
+  end
+
+  require('ufo').setup({
+    provider_selector = function(bufnr, filetype, buftype)
+      return ftMap[filetype] or customizeSelector
+    end,
+  })
+  -- end UFO folding
 end
 
 return M

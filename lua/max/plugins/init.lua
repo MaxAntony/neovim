@@ -1,12 +1,101 @@
 require('lazy').setup({
-  'folke/which-key.nvim',
   'folke/neodev.nvim',
-  'voldikss/vim-floaterm',
+  {
+    'akinsho/flutter-tools.nvim',
+    lazy = false,
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'stevearc/dressing.nvim', -- optional for vim.ui.select
+    },
+    config = function()
+      require('flutter-tools').setup()
+    end,
+  },
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    config = function()
+      require('toggleterm').setup({
+        direction = 'float',
+      })
+    end,
+  },
   'JoosepAlviste/nvim-ts-context-commentstring',
   {
+    'rcarriga/nvim-notify',
+    config = function()
+      vim.notify = require('notify')
+    end,
+  },
+  -- {
+  --   'mrded/nvim-lsp-notify',
+  --   config = function()
+  --     require('lsp-notify').setup({})
+  --   end,
+  --   dependencies = { 'rcarriga/nvim-notify' },
+  --   lazy = false,
+  -- },
+  {
+    'j-hui/fidget.nvim',
+    dependencies = { 'lualine.nvim' },
+    config = function()
+      require('fidget').setup({})
+    end,
+  },
+  {
+    'startup-nvim/startup.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim', 'folke/tokyonight.nvim' },
+    config = function()
+      require('startup').setup()
+    end,
+    lazy = false,
+  },
+  {
+    'L3MON4D3/LuaSnip',
+    -- follow latest release.
+    version = '1.2.*',
+    -- install jsregexp (optional!).
+    build = 'make install_jsregexp',
+  },
+  -- # UI theme
+  -- ===========================================
+  --[[ {
     'navarasu/onedark.nvim',
     config = function()
       require('max.plugins.onedark').setup()
+    end,
+  }, ]]
+  {
+    'ellisonleao/gruvbox.nvim',
+    config = function()
+      require('max.plugins.gruvbox').setup(false)
+    end,
+  },
+  {
+    'folke/tokyonight.nvim',
+    config = function()
+      require('max.plugins.tokyonight').setup(true)
+    end,
+    lazy = false,
+    priority = 1000,
+  },
+  {
+    'shortcuts/no-neck-pain.nvim',
+    version = '*',
+    config = function()
+      require('no-neck-pain').setup({
+        width = 150,
+      })
+    end,
+  },
+  -- =========================================
+  {
+    'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+    config = function()
+      vim.diagnostic.config({
+        virtual_text = false,
+      })
+      require('lsp_lines').setup()
     end,
   },
   {
@@ -22,6 +111,24 @@ require('lazy').setup({
     config = function()
       require('max.plugins.mason-tool-installer').setup()
     end,
+  },
+  {
+    'dmmulroy/tsc.nvim',
+    config = function()
+      require('tsc').setup()
+    end,
+  },
+  -- {
+  --   'kkoomen/vim-doge',
+  --   build = ':call doge#install()',
+  --   config = function()
+  --     vim.cmd([[ let g:doge_javascript_settings = { 'destructuring_props': 1, 'omit_redundant_param_types': 0 } ]])
+  --   end,
+  -- },
+  {
+    'danymat/neogen',
+    dependencies = 'nvim-treesitter/nvim-treesitter',
+    config = true,
   },
   {
     'neovim/nvim-lspconfig',
@@ -64,8 +171,17 @@ require('lazy').setup({
       require('nvim-autopairs').setup({})
     end,
   },
+  {
+    'lvimuser/lsp-inlayhints.nvim',
+    config = function()
+      require('max.plugins.lsp-inlayhints').setup()
+    end,
+    commit = '0948ecb',
+  },
   -- { 'mrjones2014/nvim-ts-rainbow' },
-  -- esta libreria no colorea bien el html y jsx, abrir un issue por que la libreria implemente la funcion anterior
+  -- esta librería no colorea bien el html y jsx, abrir un issue por que la librería implemente la función anterior
+  -- solución html: https://github.com/HiPhish/nvim-ts-rainbow2/issues/18#issuecomment-1498400902
+  -- entrar a los archivos del plugin y modificar los .scm correspondientes
   { 'https://gitlab.com/HiPhish/nvim-ts-rainbow2', dependencies = 'nvim-treesitter/nvim-treesitter' },
   {
     'nvim-treesitter/nvim-treesitter',
@@ -106,6 +222,9 @@ require('lazy').setup({
   {
     'folke/which-key.nvim',
     config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+
       require('which-key').setup({})
     end,
   },
@@ -130,19 +249,7 @@ require('lazy').setup({
       require('max.plugins.neoscroll').setup()
     end,
   },
-  {
-    'j-hui/fidget.nvim',
-    dependencies = { 'lualine.nvim' },
-    config = function()
-      require('fidget').setup({})
-    end,
-  },
-  {
-    'lvimuser/lsp-inlayhints.nvim',
-    config = function()
-      require('lsp-inlayhints').setup()
-    end,
-  },
+
   {
     'anuvyklack/pretty-fold.nvim',
     config = function()
@@ -201,19 +308,12 @@ require('lazy').setup({
         config = function()
           local builtin = require('statuscol.builtin')
           require('statuscol').setup({
-            wetopt = true,
-            foldfunc = 'builtin',
-            -- relculright = true,
-            -- segments = {
-            --   { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
-            --   { text = { '%s' }, click = 'v:lua.ScSa' },
-            --   { text = { builtin.lnumfunc, ' ' }, click = 'v:lua.ScLa' },
-            -- },
-            -- segments = {
-            --   { text = { '%s' }, click = 'v:lua.ScSa' },
-            --   { text = { builtin.lnumfunc }, click = 'v:lua.ScLa' },
-            --   { text = { ' ', builtin.foldfunc, ' ' }, click = 'v:lua.ScFa' },
-            -- },
+            relculright = true,
+            segments = {
+              { text = { '%s' }, click = 'v:lua.ScSa' },
+              { text = { builtin.lnumfunc }, click = 'v:lua.ScLa' },
+              { text = { ' ', builtin.foldfunc, ' ' }, click = 'v:lua.ScFa' },
+            },
           })
         end,
       },
