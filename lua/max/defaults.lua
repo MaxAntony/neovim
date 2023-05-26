@@ -35,6 +35,10 @@ opt.scrolloff = 8
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 
+-- bottom status
+o.ls = 0
+o.ch = 0
+
 -- Highlight on yank
 vim.cmd([[
   augroup YankHighlight
