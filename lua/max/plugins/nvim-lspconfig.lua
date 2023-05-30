@@ -22,12 +22,14 @@ function M.setup()
     'docker_compose_language_service',
   }
 
-  -- icons to the left bar
+  -- icons to the left bar Error = "× ", Warn = "
+  -- more icons: https://www.nerdfonts.com/cheat-sheet
+  -- more emojis: https://emojifinder.com/
   local signs = {
-    { name = 'DiagnosticSignError', text = ' ' },
-    { name = 'DiagnosticSignWarn', text = ' ' },
-    { name = 'DiagnosticSignInfo', text = ' ' },
-    { name = 'DiagnosticSignHint', text = ' ' },
+    { name = 'DiagnosticSignError', text = '❌' }, -- ''
+    { name = 'DiagnosticSignWarn', text = '⚠️' },
+    { name = 'DiagnosticSignInfo', text = ' ' },
+    { name = 'DiagnosticSignHint', text = '💡' },
   }
   for _, sign in ipairs(signs) do
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
