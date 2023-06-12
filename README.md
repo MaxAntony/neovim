@@ -1,12 +1,4 @@
-# deps
+# 💤 LazyVim
 
-- lazygit
-- fd
-- xclip
-- ripgrep
-- zip unzip
-- ttf-joypixels
-
-## tips
-
-https://www.reddit.com/r/neovim/comments/121otka/a_nice_telescope_surprise/
+A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
+Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
