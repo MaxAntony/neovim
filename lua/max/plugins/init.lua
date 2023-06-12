@@ -43,13 +43,38 @@ require('lazy').setup({
     end,
   },
   {
-    'startup-nvim/startup.nvim',
-    dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim', 'folke/tokyonight.nvim' },
+    'glepnir/dashboard-nvim',
+    event = 'VimEnter',
     config = function()
-      require('startup').setup()
+      require('dashboard').setup({
+        theme = 'hyper',
+        config = {
+          week_header = { enable = true },
+          packages = { enable = true },
+          shortcut = {
+            { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
+            {
+              icon = ' ',
+              icon_hl = '@variable',
+              desc = 'Files',
+              group = 'Label',
+              action = 'Telescope find_files',
+              key = 'f',
+            },
+          },
+        },
+      })
     end,
-    lazy = false,
+    dependencies = { { 'nvim-tree/nvim-web-devicons' } },
   },
+  -- {
+  --   'startup-nvim/startup.nvim',
+  --   dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim', 'folke/tokyonight.nvim' },
+  --   config = function()
+  --     require('startup').setup({ theme = 'startify' })
+  --   end,
+  --   lazy = false,
+  -- },
   {
     'L3MON4D3/LuaSnip',
     -- follow latest release.
@@ -192,7 +217,7 @@ require('lazy').setup({
   },
   {
     'kyazdani42/nvim-tree.lua',
-    dependencies = { 'kyazdani42/nvim-web-devicons' },
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     tag = 'nightly',
     config = function()
       require('max.plugins.nvim-tree').setup()
@@ -238,7 +263,7 @@ require('lazy').setup({
   -- https://github.com/EdenEast/nightfox.nvim tema interesante
   {
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'kyazdani42/nvim-web-devicons' },
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('max.plugins.lualine').setup()
     end,
@@ -297,6 +322,9 @@ require('lazy').setup({
         show_trailing_blankline_indent = false,
         -- show_current_context_start = true
       })
+      -- https://github.com/lukas-reineke/indent-blankline.nvim/issues/566
+      vim.g.indent_blankline_filetype_exclude =
+        { 'dashboard', 'lspinfo', 'packer', 'checkhealth', 'help', 'man', 'NvimTree' }
     end,
   },
   {
