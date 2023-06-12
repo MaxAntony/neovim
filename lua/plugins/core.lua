@@ -103,6 +103,31 @@ return {
             },
           },
         },
+        denols = {
+          single_file_support = false,
+          settings = {
+            deno = {
+              inlayHints = {
+                variableTypes = { enabled = true },
+                parameterNames = { enabled = "all" },
+                parameterTypes = { enabled = true },
+                enumMemberValues = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+              },
+              enable = true,
+              suggest = {
+                imports = {
+                  hosts = {
+                    ["https://crux.land"] = true,
+                    ["https://deno.land"] = true,
+                    ["https://x.nest.land"] = true,
+                  },
+                },
+              },
+            },
+          },
+        },
       },
       capabilities = {
         textDocument = {
