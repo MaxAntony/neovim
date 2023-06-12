@@ -28,4 +28,15 @@ return {
       },
     },
   },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      rainbow = {
+        enable = true,
+        query = { "rainbow-parens", html = "rainbow-tags" },
+        extended_mode = true,
+        max_file_lines = nil,
+      },
+    },
+  },
 }
