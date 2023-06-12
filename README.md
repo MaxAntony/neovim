@@ -1,3 +1,5 @@
+this is my first neovim configuration from scratch, after this i will be using LazyVim configuration as base
+
 # deps
 
 - lazygit
