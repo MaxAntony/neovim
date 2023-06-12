@@ -90,6 +90,19 @@ return {
             },
           },
         },
+        lua_ls = {
+          settings = {
+            Lua = {
+              hint = {
+                enable = true,
+                setType = true,
+                arrayIndex = "Auto",
+                paramName = "All",
+                paramType = true,
+              },
+            },
+          },
+        },
       },
       capabilities = {
         textDocument = {
