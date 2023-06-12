@@ -12,14 +12,14 @@ return {
         -- install from mason
         builtins.formatting.prettier,
         -- fix npm i -g eslint
-        builtins.diagnostics.eslint_d.with({
+        builtins.diagnostics.eslint.with({
           condition = function(utils)
-            return utils.root_has_file(".eslint.json") or utils.root_has_file(".eslintrc.json")
+            return utils.root_has_file(".eslint.json") or utils.root_has_file(".eslintrc.js")
           end,
         }),
-        builtins.code_actions.eslint_d.with({
+        builtins.code_actions.eslint.with({
           condition = function(utils)
-            return utils.root_has_file(".eslint.json") or utils.root_has_file(".eslintrc.json")
+            return utils.root_has_file(".eslint.json") or utils.root_has_file(".eslintrc.js")
           end,
         }),
         -- http://cspell.org/
