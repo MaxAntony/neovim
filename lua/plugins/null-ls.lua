@@ -12,16 +12,16 @@ return {
         -- install from mason
         builtins.formatting.prettier,
         -- fix npm i -g eslint
-        builtins.diagnostics.eslint.with({
-          condition = function(utils)
-            return utils.root_has_file(".eslint.json") or utils.root_has_file(".eslintrc.js")
-          end,
-        }),
-        builtins.code_actions.eslint.with({
-          condition = function(utils)
-            return utils.root_has_file(".eslint.json") or utils.root_has_file(".eslintrc.js")
-          end,
-        }),
+        -- builtins.diagnostics.eslint.with({
+        --   condition = function(utils)
+        --     return utils.root_has_file(".eslint.json") or utils.root_has_file(".eslintrc.js")
+        --   end,
+        -- }),
+        -- builtins.code_actions.eslint.with({
+        --   condition = function(utils)
+        --     return utils.root_has_file(".eslint.json") or utils.root_has_file(".eslintrc.js")
+        --   end,
+        -- }),
         -- http://cspell.org/
         -- si no lanza revisar si se tiene custom-words.txt o ejecutarlo en la terminar y ver el resultado
         -- agregar diccionario español https://github.com/streetsidesoftware/cspell-dicts/tree/main/dictionaries/es_ES#readme
