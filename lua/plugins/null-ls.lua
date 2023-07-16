@@ -1,16 +1,16 @@
 return {
-  "jose-elias-alvarez/null-ls.nvim",
-  dependencies = "nvim-lua/plenary.nvim",
+  'jose-elias-alvarez/null-ls.nvim',
+  dependencies = 'nvim-lua/plenary.nvim',
   config = function()
-    local null_ls = require("null-ls")
+    local null_ls = require('null-ls')
 
-    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-    local builtins = require("null-ls").builtins
+    local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+    local builtins = require('null-ls').builtins
 
     null_ls.setup({
       sources = {
-        -- install from mason
-        builtins.formatting.prettier,
+        -- install from mason prettierd
+        builtins.formatting.prettierd,
         -- fix npm i -g eslint
         -- builtins.diagnostics.eslint.with({
         --   condition = function(utils)
@@ -26,20 +26,14 @@ return {
         -- si no lanza revisar si se tiene custom-words.txt o ejecutarlo en la terminar y ver el resultado
         -- agregar diccionario español https://github.com/streetsidesoftware/cspell-dicts/tree/main/dictionaries/es_ES#readme
         builtins.diagnostics.cspell.with({
-          disabled_filetypes = { "NvimTree", "floaterm" },
-          condition = function(utils)
-            return utils.root_has_file({ ".cspell.json" })
-          end,
+          disabled_filetypes = { 'NvimTree', 'floaterm' },
+          condition = function(utils) return utils.root_has_file({ '.cspell.json' }) end,
           -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md#diagnostics-postprocess
-          diagnostics_postprocess = function(diagnostics)
-            diagnostics.severity = vim.diagnostic.severity["WARN"]
-          end,
+          diagnostics_postprocess = function(diagnostics) diagnostics.severity = vim.diagnostic.severity['WARN'] end,
           -- disabled_filetypes = { "NvimTree", "floaterm" },
         }),
         builtins.code_actions.cspell.with({
-          condition = function(utils)
-            return utils.root_has_file({ ".cspell.json" })
-          end,
+          condition = function(utils) return utils.root_has_file({ '.cspell.json' }) end,
         }),
         -- https://github.com/JohnnyMorganz/StyLua
         builtins.formatting.stylua,
@@ -47,17 +41,15 @@ return {
       },
 
       on_attach = function(client, bufnr)
-        if client.supports_method("textDocument/formatting") then
+        if client.supports_method('textDocument/formatting') then
           vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-          vim.api.nvim_create_autocmd("BufWritePre", {
+          vim.api.nvim_create_autocmd('BufWritePre', {
             group = augroup,
             buffer = bufnr,
             callback = function()
               vim.lsp.buf.format({
                 bufnr = bufnr,
-                filter = function(client)
-                  return client.name == "null-ls"
-                end,
+                filter = function(client) return client.name == 'null-ls' end,
               })
             end,
           })

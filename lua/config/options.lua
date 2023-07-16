@@ -1,15 +1,20 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
-local o = vim.o
 local opt = vim.opt
-
-o.foldcolumn = "1" -- '0' is not bad
-o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-o.foldlevelstart = 99
-o.foldenable = true
-o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 -- vim.opt.breakindent = true
 opt.wrap = true
 opt.linebreak = true
+
+-- activate inlay hints only on insert mode
+-- vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+--   callback = function()
+--     vim.lsp.inlay_hint(0, true)
+--   end,
+-- })
+-- vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+--   callback = function()
+--     vim.lsp.inlay_hint(0, false)
+--   end,
+-- })
