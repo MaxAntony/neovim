@@ -4,3 +4,7 @@
 
 - nvim-spectre
 - typescript-tools.nvim
+
+## lectura
+
+- [rewrite vimrc in lua](https://medium.com/@sugetatomo/a-journey-to-rewriting-vimrc-in-lua-for-the-first-time-all-done-with-lua-c4787e895b53)
