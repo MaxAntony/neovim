@@ -7,6 +7,11 @@ local opt = vim.opt
 opt.wrap = true
 opt.linebreak = true
 
+-- recommended* for vgit
+vim.o.updatetime = 300
+vim.o.incsearch = false
+vim.wo.signcolumn = 'yes'
+
 -- activate inlay hints only on insert mode
 -- vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 --   callback = function()
