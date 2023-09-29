@@ -1,5 +1,5 @@
 return {
-  'jose-elias-alvarez/null-ls.nvim',
+  'nvimtools/none-ls.nvim',
   dependencies = 'nvim-lua/plenary.nvim',
   config = function()
     local null_ls = require('null-ls')
@@ -10,7 +10,7 @@ return {
     null_ls.setup({
       sources = {
         -- install from mason prettierd
-        builtins.formatting.prettier,
+        builtins.formatting.prettierd,
         -- fix npm i -g eslint
         -- builtins.diagnostics.eslint.with({
         --   condition = function(utils)
