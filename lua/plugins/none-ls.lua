@@ -11,6 +11,7 @@ return {
       sources = {
         -- install from mason prettierd
         builtins.formatting.prettierd,
+        -- builtins.formatting.prettier,
         -- fix npm i -g eslint
         -- builtins.diagnostics.eslint.with({
         --   condition = function(utils)

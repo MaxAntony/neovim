@@ -1,5 +1,3 @@
-# NeoVim
-
 ## Plugins interesantes
 
 - nvim-spectre
@@ -13,7 +11,7 @@
 
 ### nvim-ufo
 
-en `lua/ufo/provider/lsp` en la función getClients agregar la linea en la condicional antes que haga return true
+en `lua/ufo/provider/lsp/nvim.lua` en la función getClients agregar la linea en la condicional antes que haga return true
 
 ```lua
 if client.name == 'angularls' then return false end

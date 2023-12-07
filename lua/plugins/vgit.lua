@@ -1,5 +1,5 @@
 return {
-  enabled = true,
+  enabled = false,
   -- spellman repo fix doc command duplication, replace when repo original is fixed
   'spellman/vgit.nvim',
   dependencies = { 'nvim-lua/plenary.nvim' },

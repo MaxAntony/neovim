@@ -25,8 +25,21 @@ return {
               },
             },
             typescript = {
+              referencesCodeLens = { enabled = true, showOnAllFunctions = true },
+              implementationsCodeLens = { enabled = true },
+              autoClosingTags = true,
               preferGoToSourceDefinition = true,
               inlayHints = {
+                enumMemberValues = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+                parameterTypes = { enabled = true },
+                parameterNames = { enabled = 'all', suppressWhenArgumentMatchesName = true },
+                propertyDeclarationTypes = { enabled = true },
+                variableTypes = {
+                  enabled = true,
+                  suppressWhenTypeMatchesName = true,
+                },
+
                 -- don't work raise issue at mason in schema tsserver
                 -- enumMemberValues = { enabled = true },
                 -- functionLikeReturnTypes = { enabled = true },
@@ -99,12 +112,17 @@ return {
   },
   {
     'nvim-treesitter/nvim-treesitter',
+    dependencies = { 'elgiano/nvim-treesitter-angular', branch = 'topic/jsx-fix' },
     opts = {
       rainbow = {
         enable = true,
         query = { 'rainbow-parens', html = 'rainbow-tags' },
         extended_mode = true,
         max_file_lines = nil,
+      },
+      -- nvim-ts-autotag
+      autotag = {
+        enable_close_on_slash = false,
       },
     },
   },
@@ -152,6 +170,33 @@ return {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
       }
+    end,
+  },
+  {
+    'nvimdev/dashboard-nvim',
+    config = function()
+      require('dashboard').setup({
+        hide = {
+          -- NOTE: added this to fix no lualine in buffers
+          statusline = false,
+        },
+        theme = 'hyper',
+        config = {
+          week_header = { enable = true },
+          packages = { enable = true },
+          shortcut = {
+            { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
+            {
+              icon = ' ',
+              icon_hl = '@variable',
+              desc = 'Files',
+              group = 'Label',
+              action = 'Telescope find_files',
+              key = 'f',
+            },
+          },
+        },
+      })
     end,
   },
 }
