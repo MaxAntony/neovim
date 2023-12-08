@@ -1,5 +1,4 @@
-return -- lazy.nvim:
-{
+return {
   'smoka7/multicursors.nvim',
   event = 'VeryLazy',
   dependencies = {
