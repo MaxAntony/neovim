@@ -1,39 +1,36 @@
 return {
   'nvimtools/none-ls.nvim',
-  dependencies = 'nvim-lua/plenary.nvim',
+  dependencies = { 'nvim-lua/plenary.nvim', 'davidmh/cspell.nvim' },
   config = function()
     local null_ls = require('null-ls')
+    local cspell = require('cspell')
 
     local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
     local builtins = require('null-ls').builtins
 
     null_ls.setup({
       sources = {
-        -- install from mason prettierd
-        builtins.formatting.prettierd,
         -- builtins.formatting.prettier,
+        builtins.formatting.prettierd,
+        -- install from mason prettierd
         -- fix npm i -g eslint
-        -- builtins.diagnostics.eslint.with({
-        --   condition = function(utils)
-        --     return utils.root_has_file(".eslint.json") or utils.root_has_file(".eslintrc.js")
-        --   end,
-        -- }),
-        -- builtins.code_actions.eslint.with({
-        --   condition = function(utils)
-        --     return utils.root_has_file(".eslint.json") or utils.root_has_file(".eslintrc.js")
-        --   end,
-        -- }),
+        --[[ builtins.diagnostics.eslint.with({
+          condition = function(utils) return utils.root_has_file('.eslint.json') or utils.root_has_file('.eslintrc.js') end,
+        }), ]]
+        --[[ builtins.code_actions.eslint.with({
+          condition = function(utils) return utils.root_has_file('.eslint.json') or utils.root_has_file('.eslintrc.js') end,
+        }), ]]
         -- http://cspell.org/
         -- si no lanza revisar si se tiene custom-words.txt o ejecutarlo en la terminar y ver el resultado
         -- agregar diccionario español https://github.com/streetsidesoftware/cspell-dicts/tree/main/dictionaries/es_ES#readme
-        builtins.diagnostics.cspell.with({
+        cspell.diagnostics.with({
           disabled_filetypes = { 'NvimTree', 'floaterm' },
           condition = function(utils) return utils.root_has_file({ '.cspell.json' }) end,
           -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md#diagnostics-postprocess
           diagnostics_postprocess = function(diagnostics) diagnostics.severity = vim.diagnostic.severity['WARN'] end,
           -- disabled_filetypes = { "NvimTree", "floaterm" },
         }),
-        builtins.code_actions.cspell.with({
+        cspell.code_actions.with({
           condition = function(utils) return utils.root_has_file({ '.cspell.json' }) end,
         }),
         -- https://github.com/JohnnyMorganz/StyLua

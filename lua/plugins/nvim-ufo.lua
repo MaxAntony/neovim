@@ -67,7 +67,7 @@ return {
         :catch(function(err) return handleFallbackException(err, 'indent') end)
     end
 
-    opts.close_fold_kinds = { 'imports', 'comment' }
+    -- opts.close_fold_kinds_for_ft = { 'imports', 'comment' }
     opts.provider_selector = function(bufnr, filetype, buftype) return ftMap[filetype] or customizeSelector end
 
     -- return {

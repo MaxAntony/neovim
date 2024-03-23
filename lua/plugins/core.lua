@@ -129,6 +129,7 @@ return {
   {
     'nvim-neo-tree/neo-tree.nvim',
     branch = 'v3.x',
+    -- version = '3.14',
     opts = {
       close_if_last_window = true,
       window = {
