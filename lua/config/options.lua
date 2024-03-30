@@ -12,6 +12,9 @@ vim.o.updatetime = 300
 vim.o.incsearch = false
 vim.wo.signcolumn = 'yes'
 
+-- remove transparency for cmp popup window
+vim.o.pb = 0
+
 -- activate inlay hints only on insert mode
 -- vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 --   callback = function()
