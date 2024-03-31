@@ -15,6 +15,7 @@ vim.wo.signcolumn = 'yes'
 -- remove transparency for cmp popup window
 vim.o.pb = 0
 
+-- https://detachhead.github.io/basedpyright/#/
 vim.g.lazyvim_python_lsp = 'basedpyright'
 
 -- activate inlay hints only on insert mode
