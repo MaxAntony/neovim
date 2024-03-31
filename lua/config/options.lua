@@ -15,6 +15,8 @@ vim.wo.signcolumn = 'yes'
 -- remove transparency for cmp popup window
 vim.o.pb = 0
 
+vim.g.lazyvim_python_lsp = 'basedpyright'
+
 -- activate inlay hints only on insert mode
 -- vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 --   callback = function()
