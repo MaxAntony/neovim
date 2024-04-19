@@ -31,6 +31,12 @@ end
 
 return {
   {
+    'LazyVim/LazyVim',
+    opts = {
+      colorscheme = 'gruvbox-baby',
+    },
+  },
+  {
     'neovim/nvim-lspconfig',
 
     ---@param _ LazyPlugin
