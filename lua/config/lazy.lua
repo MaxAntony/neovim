@@ -19,6 +19,8 @@ require('lazy').setup({
     { import = 'lazyvim.plugins.extras.dap.nlua' },
     { import = 'lazyvim.plugins.extras.ui.mini-animate' },
     { import = 'lazyvim.plugins.extras.lsp.none-ls' },
+    { import = 'lazyvim.plugins.extras.lang.yaml' },
+    { import = 'lazyvim.plugins.extras.editor.aerial' },
     -- import/override with your plugins
     { import = 'plugins' },
   },
