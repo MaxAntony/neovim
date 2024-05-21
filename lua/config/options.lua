@@ -7,6 +7,8 @@ local opt = vim.opt
 opt.wrap = true
 opt.linebreak = true
 
+opt.termguicolors = true
+
 -- recommended* for vgit
 vim.o.updatetime = 300
 vim.o.incsearch = false
@@ -17,6 +19,12 @@ vim.o.pb = 0
 
 -- https://detachhead.github.io/basedpyright/#/
 vim.g.lazyvim_python_lsp = 'basedpyright'
+
+-- disable built-in spelling
+vim.cmd('set nospell')
+vim.opt.spell = false
+vim.opt_local.spell = false
+-- vim.cmd('autocmd! wrap_spell')
 
 -- activate inlay hints only on insert mode
 -- vim.api.nvim_create_autocmd({ "InsertEnter" }, {
