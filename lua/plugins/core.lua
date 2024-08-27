@@ -37,9 +37,10 @@ return {
     },
   },
   { 'folke/tokyonight.nvim', opts = { style = 'storm' } },
-  {
-    'echasnovski/mini.animate',
-    opts = { resize = { enable = false } },
-  },
+  -- {
+  --   'echasnovski/mini.animate',
+  --   enable = false,
+  --   opts = { resize = { enable = false } },
+  -- },
   -- override nvim-cmp
 }

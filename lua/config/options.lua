@@ -18,6 +18,7 @@ vim.wo.signcolumn = 'yes'
 vim.o.pb = 0
 
 -- https://detachhead.github.io/basedpyright/#/
+-- Set to "basedpyright" to use basedpyright instead of pyright.
 vim.g.lazyvim_python_lsp = 'basedpyright'
 
 -- disable built-in spelling
